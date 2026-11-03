@@ -17,6 +17,7 @@ backgroundColor = "#111A2B"
 [server]
 headless = true
 runOnSave = false
+fileWatcherType = "none"
 
 [browser]
 gatherUsageStats = false

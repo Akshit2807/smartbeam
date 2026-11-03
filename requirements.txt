@@ -1,12 +1,10 @@
-# SmartBeam 2.0 runtime + test dependencies (Python 3.12).
-# Lower bounds are the API levels the code uses; the versions in comments are the ones the app and the
-# 316-test suite were verified with.
-streamlit>=1.66    # tested 1.66.1 (st.navigation(expanded=...), width="stretch", metric delta_arrow)
-numpy>=2.0         # tested 2.5.4
-scipy>=1.13        # tested 1.18.1 (SLSQP optimizer, linear solves)
-pandas>=2.2        # tested 3.1.0
-plotly>=6.0        # tested 7.1.0
-matplotlib>=3.9    # tested 3.11.2 (PDF figures, DejaVu fonts for σ/δ/₹)
-reportlab>=4.2     # tested 5.1.0 (PDF reports)
-sympy>=1.13        # tested 1.14.0 (symbolic verification in tests)
-pytest>=8.0        # tested 9.2.0
+# SmartBeam 2.0: exact versions the app and the 316-test suite were verified with (Python 3.12).
+streamlit==1.66.1
+numpy==2.5.4
+scipy==1.18.1
+pandas==3.1.0
+plotly==7.1.0
+matplotlib==3.11.2
+reportlab==5.1.0
+sympy==1.14.0
+pytest==9.2.0
