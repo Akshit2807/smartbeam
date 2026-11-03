@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "name": "Final demo",
+  "L": 2.0,
+  "section": {
+    "shape": "rect",
+    "b": 0.04,
+    "h": 0.08,
+    "d": null,
+    "D": null
+  },
+  "material": {
+    "name": "Structural steel (IS 2062 E250 / ASTM A36)",
+    "E": 200000000000.0,
+    "yield_strength": 250000000.0,
+    "nu": 0.3,
+    "density": 7850,
+    "uts": 410000000.0,
+    "cost_per_kg": 70,
+    "sigma_f_prime": null,
+    "b_fatigue": null,
+    "endurance_limit": null,
+    "approximate": true,
+    "note": "Approximate typical values for this grade; verify against supplier/standard data."
+  },
+  "supports": [
+    {
+      "type": "pin",
+      "x": 0.0
+    },
+    {
+      "type": "roller",
+      "x": 1.6
+    }
+  ],
+  "loads": [
+    {
+      "x": 2.0,
+      "magnitude": 1500.0,
+      "angle_deg": -90.0,
+      "kind": "point"
+    },
+    {
+      "x1": 0.4,
+      "x2": 1.2,
+      "w1": 2000.0,
+      "w2": 2000.0,
+      "direction": "down",
+      "kind": "distributed"
+    },
+    {
+      "x": 1.0,
+      "M": -800.0,
+      "kind": "moment"
+    }
+  ],
+  "playground": {
+    "units": {
+      "force": "kN",
+      "length": "m",
+      "dist": "kN/m",
+      "moment": "kN\u00b7m"
+    }
+  }
+}

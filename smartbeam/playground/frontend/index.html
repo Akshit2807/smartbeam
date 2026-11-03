@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SmartBeam Playground</title>
+<link rel="stylesheet" href="playground.css">
+</head>
+<body>
+<div id="app">
+  <header id="toolbar" role="toolbar" aria-label="Editor toolbar">
+    <div class="grp">
+      <button data-cmd="undo" title="Undo (Ctrl+Z)">↶ Undo</button>
+      <button data-cmd="redo" title="Redo (Ctrl+Y)">↷ Redo</button>
+    </div>
+    <div class="grp">
+      <button data-cmd="delete" title="Delete selected (Del)">Delete</button>
+      <button data-cmd="duplicate" title="Duplicate selected (Ctrl+D)">Duplicate</button>
+      <button data-cmd="clear" title="Remove all supports and loads">Clear</button>
+      <button data-cmd="reset" title="Reset workspace to the default cantilever">Reset</button>
+    </div>
+    <div class="grp menu-wrap">
+      <button data-cmd="presets" aria-haspopup="true" title="Load a preset">Presets ▾</button>
+      <div id="presetMenu" class="menu" hidden></div>
+    </div>
+    <div class="grp">
+      <label class="chk" title="Snap positions to the grid"><input type="checkbox" id="snapChk" checked> Snap</label>
+      <select id="gridSel" title="Grid size">
+        <option value="0.01">0.01 m</option><option value="0.025">0.025 m</option>
+        <option value="0.05" selected>0.05 m</option><option value="0.1">0.1 m</option>
+        <option value="0.25">0.25 m</option><option value="0.5">0.5 m</option>
+      </select>
+    </div>
+    <div class="grp">
+      <button data-cmd="zoomOut" title="Zoom out (or Ctrl/⌘ + mouse wheel)">−</button>
+      <button data-cmd="fit" title="Fit beam to view">Fit</button>
+      <button data-cmd="zoomIn" title="Zoom in (or Ctrl/⌘ + mouse wheel)">+</button>
+    </div>
+    <div class="grp">
+      <button data-cmd="save" title="Download the configuration as JSON">Save JSON</button>
+      <button data-cmd="load" title="Load a configuration JSON file">Load JSON</button>
+      <input type="file" id="fileIn" accept=".json,application/json" hidden>
+    </div>
+    <div class="grp right">
+      <label class="chk" title="Re-analyse automatically ~0.4 s after each change"><input type="checkbox" id="liveChk"> Live</label>
+      <button data-cmd="analyse" class="primary" title="Run the SmartBeam engine">▶ Analyse Structure</button>
+    </div>
+  </header>
+
+  <aside id="toolbox" aria-label="Toolbox">
+    <div class="tb-title">Beam</div>
+    <div class="tool" draggable="true" data-tool="beam"><svg viewBox="0 0 40 20"><rect x="2" y="7" width="36" height="6" rx="1" class="g-beam"/></svg>Beam</div>
+    <div class="tb-title">Supports</div>
+    <div class="tool" draggable="true" data-tool="fixed"><svg viewBox="0 0 40 20"><line x1="14" y1="2" x2="14" y2="18" class="g-sup"/><path d="M14 4l-6 5M14 9l-6 5M14 14l-6 5" class="g-hatch"/><rect x="14" y="8" width="24" height="4" class="g-beam"/></svg>Fixed</div>
+    <div class="tool" draggable="true" data-tool="pin"><svg viewBox="0 0 40 20"><path d="M20 4l-7 11h14z" class="g-sup"/><line x1="10" y1="16" x2="30" y2="16" class="g-sup"/></svg>Pinned</div>
+    <div class="tool" draggable="true" data-tool="roller"><svg viewBox="0 0 40 20"><path d="M20 3l-6 9h12z" class="g-sup"/><circle cx="16" cy="14.5" r="2" class="g-sup"/><circle cx="24" cy="14.5" r="2" class="g-sup"/><line x1="10" y1="17.5" x2="30" y2="17.5" class="g-sup"/></svg>Roller</div>
+    <div class="tb-title">Forces</div>
+    <div class="tool" draggable="true" data-tool="point_down"><svg viewBox="0 0 40 20"><path d="M20 2v13M15 10l5 7 5-7" class="g-load"/></svg>Point ↓</div>
+    <div class="tool" draggable="true" data-tool="point_up"><svg viewBox="0 0 40 20"><path d="M20 18V5M15 10l5-7 5 7" class="g-load"/></svg>Point ↑</div>
+    <div class="tool" draggable="true" data-tool="axial"><svg viewBox="0 0 40 20"><path d="M4 10h30M28 5l7 5-7 5" class="g-load"/></svg>Axial →</div>
+    <div class="tool" draggable="true" data-tool="inclined"><svg viewBox="0 0 40 20"><path d="M12 2l14 14M19 16h8v-8" class="g-load"/></svg>Inclined</div>
+    <div class="tb-title">Distributed</div>
+    <div class="tool" draggable="true" data-tool="udl"><svg viewBox="0 0 40 20"><path d="M4 4h32M8 4v12M20 4v12M32 4v12M6 13l2 4 2-4M18 13l2 4 2-4M30 13l2 4 2-4" class="g-load"/></svg>Full UDL</div>
+    <div class="tool" draggable="true" data-tool="partial_udl"><svg viewBox="0 0 40 20"><path d="M12 4h16M14 4v12M26 4v12M12 13l2 4 2-4M24 13l2 4 2-4" class="g-load"/><line x1="2" y1="18" x2="38" y2="18" class="g-dim"/></svg>Partial UDL</div>
+    <div class="tool" draggable="true" data-tool="linear"><svg viewBox="0 0 40 20"><path d="M4 9L36 2M8 8v8M20 6v10M32 3v13M6 13l2 4 2-4M18 13l2 4 2-4M30 13l2 4 2-4" class="g-load"/></svg>Linear</div>
+    <div class="tool" draggable="true" data-tool="triangular"><svg viewBox="0 0 40 20"><path d="M4 15L36 2M20 9v7M32 4v12M18 13l2 4 2-4M30 13l2 4 2-4" class="g-load"/></svg>Triangular</div>
+    <div class="tb-title">Moments</div>
+    <div class="tool" draggable="true" data-tool="moment_cw"><svg viewBox="0 0 40 20"><path d="M13 14a8 8 0 1 1 14 0" class="g-mom"/><path d="M24 11l3 4 3-3" class="g-mom"/></svg>Moment ↻</div>
+    <div class="tool" draggable="true" data-tool="moment_ccw"><svg viewBox="0 0 40 20"><path d="M27 14a8 8 0 1 0 -14 0" class="g-mom"/><path d="M16 11l-3 4-3-3" class="g-mom"/></svg>Moment ↺</div>
+    <p class="tb-hint">Drag onto the beam, or click to add.</p>
+  </aside>
+
+  <main id="stage">
+    <svg id="cv" xmlns="http://www.w3.org/2000/svg" aria-label="Beam canvas"></svg>
+    <div id="modes" role="tablist" aria-label="Result overlay">
+      <button data-mode="config" class="on">Configuration</button>
+      <button data-mode="sfd">SFD</button>
+      <button data-mode="bmd">BMD</button>
+      <button data-mode="defl">Deflection</button>
+      <button data-mode="stress">Stress</button>
+    </div>
+    <div id="toast" role="status" aria-live="polite"></div>
+  </main>
+
+  <aside id="props" aria-label="Properties"></aside>
+
+  <footer id="status">
+    <span id="coord">x = —</span>
+    <span id="info"></span>
+    <span id="sync"></span>
+  </footer>
+</div>
+<script src="playground.js"></script>
+</body>
+</html>
