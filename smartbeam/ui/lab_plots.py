@@ -13,7 +13,7 @@ from plotly.subplots import make_subplots
 from smartbeam import lab, report
 from smartbeam.ui.theme import COLORS, SERIES
 
-_PDF_COLORS = ["#5E81AC", "#D08770", "#B48EAD", "#8FAE78", "#5E81AC", "#BF616A"]
+_PDF_COLORS = ["#2D6CDF", "#B8975A", "#12355B", "#2E7D4F", "#7EA2E3", "#E06A5A"]
 
 
 def _series(res: lab.ExperimentResult):
@@ -95,7 +95,7 @@ def report_figures(res: lab.ExperimentResult) -> list[Figure]:
         if res.log_axes:
             ax.set_xscale("log")
             ax.set_yscale("log")
-        ax.grid(True, color="#E5E9F0", linewidth=0.6)
+        ax.grid(True, color="#EFE8D6", linewidth=0.6)
         for side in ("top", "right"):
             ax.spines[side].set_visible(False)
         if res.group or res.log_axes:

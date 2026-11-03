@@ -41,12 +41,12 @@ for _name, _file in (("DejaVu", "DejaVuSans.ttf"), ("DejaVu-Bold", "DejaVuSans-B
 pdfmetrics.registerFontFamily("DejaVu", normal="DejaVu", bold="DejaVu-Bold", italic="DejaVu-Oblique",
                               boldItalic="DejaVu-Bold")
 
-INK = colors.HexColor("#2E3440")
-MUTED = colors.HexColor("#4C566A")
-ACCENT = colors.HexColor("#5E81AC")  # print-safe dark cyan
-RULE = colors.HexColor("#D8DEE9")
-ZEBRA = colors.HexColor("#ECEFF4")
-PASS_C, FAIL_C, WARN_C = colors.HexColor("#5E7F4C"), colors.HexColor("#A3505A"), colors.HexColor("#B0674D")
+INK = colors.HexColor("#0A1B33")
+MUTED = colors.HexColor("#1F4A80")
+ACCENT = colors.HexColor("#2D6CDF")  # print-safe dark cyan
+RULE = colors.HexColor("#DCC9A1")
+ZEBRA = colors.HexColor("#F7F3E8")
+PASS_C, FAIL_C, WARN_C = colors.HexColor("#2E7D4F"), colors.HexColor("#B4443A"), colors.HexColor("#9A7B3F")
 STATUS_COLOR = {"SAFE": PASS_C, "WARNING": WARN_C, "YIELD PREDICTED": FAIL_C, "BUCKLING PREDICTED": FAIL_C,
                 "OPTIMIZED": PASS_C, "INFEASIBLE": FAIL_C, "FAILED": FAIL_C, "PASS": PASS_C, "FAIL": FAIL_C}
 
@@ -68,9 +68,9 @@ _S = {
 CONTENT_W = A4[0] - 36 * mm
 
 # matplotlib print style (light background, same accent family as the app)
-_C = {"cyan": "#5E81AC", "amber": "#D08770", "violet": "#B48EAD", "green": "#8FAE78", "red": "#BF616A",
-      "ink": "#2E3440", "grid": "#E5E9F0", "muted": "#4C566A"}
-_RC = {"font.family": "DejaVu Sans", "font.size": 9, "axes.edgecolor": "#616E88", "axes.labelcolor": _C["ink"],
+_C = {"cyan": "#2D6CDF", "amber": "#B8975A", "violet": "#12355B", "green": "#2E7D4F", "red": "#E06A5A",
+      "ink": "#0A1B33", "grid": "#EFE8D6", "muted": "#1F4A80"}
+_RC = {"font.family": "DejaVu Sans", "font.size": 9, "axes.edgecolor": "#6B7F99", "axes.labelcolor": _C["ink"],
        "axes.grid": True, "grid.color": _C["grid"], "grid.linewidth": 0.6, "xtick.color": _C["muted"],
        "ytick.color": _C["muted"], "axes.spines.top": False, "axes.spines.right": False,
        "axes.titleweight": "bold", "axes.titlesize": 10, "legend.frameon": False, "legend.fontsize": 8}

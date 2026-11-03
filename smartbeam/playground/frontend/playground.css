@@ -1,7 +1,7 @@
 :root {
-  --bg: #2E3440; --panel: #3B4252; --panel2: #434C5E; --border: #4C566A; --grid: #3B4252;
-  --text: #ECEFF4; --muted: #A0A9BA; --cyan: #88C0D0; --amber: #EBCB8B; --green: #A3BE8C;
-  --red: #BF616A; --violet: #B48EAD; --blue: #81A1C1;
+  --bg: #0A1B33; --panel: #0E2847; --panel2: #12355B; --border: #1F4A80; --grid: #0E2847;
+  --text: #F7F3E8; --muted: #B8AE95; --cyan: #2D6CDF; --amber: #DCC9A1; --green: #5FBF8F;
+  --red: #E06A5A; --violet: #F7F3E8; --blue: #7EA2E3;
   --mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
 }
 * { box-sizing: border-box; }
@@ -22,8 +22,8 @@ button { background: var(--panel2); border: 1px solid var(--border); border-radi
 button:hover:not(:disabled) { border-color: var(--cyan); color: var(--cyan); }
 button:disabled { opacity: .38; cursor: default; }
 button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--cyan); outline-offset: 1px; }
-button.primary { background: var(--cyan); color: #2E3440; border-color: var(--cyan); font-weight: 700; padding: 5px 14px; }
-button.primary:hover { background: #8FBCBB; color: #2E3440; }
+button.primary { background: var(--cyan); color: #F7F3E8; border-color: var(--cyan); font-weight: 700; padding: 5px 14px; }
+button.primary:hover { background: #4A84E8; color: #F7F3E8; }
 select, input[type=number], input[type=text] { background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
   padding: 3px 6px; }
 .chk { display: flex; align-items: center; gap: 4px; color: var(--muted); cursor: pointer; }
@@ -44,7 +44,7 @@ select, input[type=number], input[type=text] { background: var(--bg); border: 1p
 .tool:active { cursor: grabbing; }
 .tool svg { width: 34px; height: 17px; flex: none; }
 .tb-hint { color: var(--muted); font-size: 11px; margin: 10px 2px 4px; }
-.g-beam { fill: #3D5268; stroke: var(--cyan); stroke-width: 1.2; }
+.g-beam { fill: #1B4389; stroke: var(--cyan); stroke-width: 1.2; }
 .g-sup { fill: none; stroke: var(--text); stroke-width: 1.4; }
 .g-hatch { fill: none; stroke: var(--muted); stroke-width: 1; }
 .g-load { fill: none; stroke: var(--amber); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
@@ -53,7 +53,7 @@ select, input[type=number], input[type=text] { background: var(--bg); border: 1p
 
 /* stage */
 #stage { grid-area: stage; position: relative; overflow: hidden; background:
-  radial-gradient(ellipse at 50% 30%, #3B4252 0%, var(--bg) 70%); }
+  radial-gradient(ellipse at 50% 30%, #0E2847 0%, var(--bg) 70%); }
 #stage.drop { box-shadow: inset 0 0 0 2px var(--cyan); }
 #cv { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; user-select: none; cursor: grab; }
 #cv.panning { cursor: grabbing; }

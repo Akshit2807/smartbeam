@@ -19,8 +19,8 @@ const S = {
   drag: null, hoverX: null, syncTimer: null, sendCount: 0,
 };
 const UNIT = { N: 1, kN: 1e3, m: 1, mm: 1e-3, "N/m": 1, "kN/m": 1e3, "N·m": 1, "kN·m": 1e3 };
-const C = { cyan: "#88C0D0", amber: "#EBCB8B", green: "#A3BE8C", red: "#BF616A", violet: "#B48EAD",
-  text: "#ECEFF4", muted: "#A0A9BA", border: "#4C566A", grid: "#3B4252", bg: "#2E3440", blue: "#81A1C1" };
+const C = { cyan: "#2D6CDF", amber: "#DCC9A1", green: "#5FBF8F", red: "#E06A5A", violet: "#F7F3E8",
+  text: "#F7F3E8", muted: "#B8AE95", border: "#1F4A80", grid: "#0E2847", bg: "#0A1B33", blue: "#7EA2E3" };
 const $ = (id) => document.getElementById(id);
 const svg = $("cv"), stage = $("stage"), props = $("props");
 const clone = (o) => JSON.parse(JSON.stringify(o));
@@ -492,7 +492,7 @@ function renderCanvas() {
   const cfg = S.cfg, L = cfg.L, w = W(), h = H(), r = res();
   let g = "<defs>";
   if (r && S.mode === "stress") g += stressGradient(r);
-  g += `<linearGradient id="bgrad" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#5E81AC"/><stop offset="1" stop-color="#46617F"/></linearGradient></defs>`;
+  g += `<linearGradient id="bgrad" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2D6CDF"/><stop offset="1" stop-color="#12355B"/></linearGradient></defs>`;
 
   // grid
   const x0 = wx(0), x1 = wx(w);
@@ -502,11 +502,11 @@ function renderCanvas() {
       g += `<line x1="${sx(x)}" y1="0" x2="${sx(x)}" y2="${h - 40}" stroke="${C.grid}" stroke-width="1"/>`;
   }
   for (let x = Math.ceil(x0 / major) * major; x <= x1; x += major)
-    g += `<line x1="${sx(x)}" y1="0" x2="${sx(x)}" y2="${h - 40}" stroke="#3B4252" stroke-width="1"/>`;
+    g += `<line x1="${sx(x)}" y1="0" x2="${sx(x)}" y2="${h - 40}" stroke="#0E2847" stroke-width="1"/>`;
 
   // ruler
   const ry = h - 34;
-  g += `<rect x="0" y="${ry}" width="${w}" height="34" fill="#272C36"/><line x1="0" y1="${ry}" x2="${w}" y2="${ry}" stroke="${C.border}"/>`;
+  g += `<rect x="0" y="${ry}" width="${w}" height="34" fill="#07142A"/><line x1="0" y1="${ry}" x2="${w}" y2="${ry}" stroke="${C.border}"/>`;
   const minor = major / 5;
   for (let x = Math.ceil(x0 / minor) * minor; x <= x1; x += minor) {
     const isMajor = Math.abs(x / major - Math.round(x / major)) < 1e-6;
@@ -557,7 +557,7 @@ function renderCanvas() {
 
   if (S.error) {
     const msg = S.error.length > 150 ? S.error.slice(0, 147) + "…" : S.error;
-    g += `<rect x="12" y="10" width="${w - 24}" height="34" rx="8" fill="#523F4A" stroke="${C.red}" pointer-events="none"/>` +
+    g += `<rect x="12" y="10" width="${w - 24}" height="34" rx="8" fill="#412E3D" stroke="${C.red}" pointer-events="none"/>` +
       text(24, 31, "⚠ " + msg, { anchor: "start", fill: C.red });
   }
   // crosshair

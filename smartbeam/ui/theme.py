@@ -1,4 +1,4 @@
-"""Nord engineering theme: CSS injection + shared Plotly template ('smartbeam').
+"""Blueprint engineering theme: CSS injection + shared Plotly template ('smartbeam').
 
 Render figures with st.plotly_chart(fig, theme=None) so Streamlit does not override the template.
 """
@@ -8,21 +8,22 @@ import plotly.graph_objects as go
 import plotly.io as pio
 import streamlit as st
 
-# Nord palette (https://www.nordtheme.com): Polar Night surfaces, Snow Storm text, Frost + Aurora accents.
+# Blueprint palette: navy #0A1B33, deep blue #12355B, blue #2D6CDF, sand #DCC9A1, cream #F7F3E8.
+# Surface/grid tints are mixes of those five; green and red are added only for SAFE/FAIL and tension.
 COLORS = {
-    "bg": "#2E3440",  # nord0  Polar Night: page background
-    "panel": "#3B4252",  # nord1: cards / sidebar
-    "panel_2": "#434C5E",  # nord2: raised surfaces, hover
-    "border": "#4C566A",  # nord3
-    "grid": "#434C5E",  # nord2
-    "text": "#ECEFF4",  # nord6  Snow Storm
-    "muted": "#A0A9BA",  # nord4 dimmed for secondary text (5:1 contrast on nord0)
-    "cyan": "#88C0D0",  # nord8  Frost: primary accent, geometry, deflection
-    "amber": "#EBCB8B",  # nord13 Aurora yellow: loads, maxima
-    "green": "#A3BE8C",  # nord14 Aurora green: SAFE / pass
-    "red": "#BF616A",  # nord11 Aurora red: YIELD PREDICTED / fail
-    "violet": "#B48EAD",  # nord15 Aurora purple
-    "blue": "#81A1C1",  # nord9  Frost
+    "bg": "#0A1B33",  # navy: page background
+    "panel": "#0E2847",  # navy/deep-blue mix: cards, sidebar
+    "panel_2": "#12355B",  # deep blue: raised surfaces
+    "border": "#1F4A80",  # deep blue -> blue tint
+    "grid": "#173E6B",
+    "text": "#F7F3E8",  # cream (15.6:1 on navy)
+    "muted": "#B8AE95",  # sand dimmed: secondary text (7.8:1)
+    "cyan": "#2D6CDF",  # blue: primary accent, geometry, deflection, compression
+    "amber": "#DCC9A1",  # sand: loads, maxima, highlights
+    "green": "#5FBF8F",  # SAFE / pass
+    "red": "#E06A5A",  # coral: tension, YIELD PREDICTED / fail
+    "violet": "#F7F3E8",  # cream: third chart series
+    "blue": "#7EA2E3",  # light blue (blue -> cream): small blue text, fourth series
 }
 SERIES = [COLORS[k] for k in ("cyan", "amber", "violet", "green", "blue", "red")]
 FONT = "Inter, 'Segoe UI', system-ui, -apple-system, Helvetica, Arial, sans-serif"
@@ -41,7 +42,7 @@ pio.templates["smartbeam"] = go.layout.Template(layout=go.Layout(
     legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(color=COLORS["muted"])),
     hoverlabel=dict(bgcolor=COLORS["panel_2"], bordercolor=COLORS["cyan"], font=dict(family=MONO, color=COLORS["text"])),
     margin=dict(l=60, r=24, t=48, b=48),
-    colorscale=dict(diverging=[[0, "#5E81AC"], [0.5, "#ECEFF4"], [1, "#BF616A"]]),
+    colorscale=dict(diverging=[[0, "#2D6CDF"], [0.5, "#F7F3E8"], [1, "#E06A5A"]]),
 ))
 # Merge once at import. A "a+b" default makes Plotly merge and re-validate both templates for every figure
 # (~8 ms each); a single pre-merged template costs ~0.3 ms per figure.
@@ -70,10 +71,10 @@ h1 {{ font-weight:700; }}
 .stButton > button, .stDownloadButton > button {{ border-radius:8px; border:1px solid var(--sb-border);
         font-weight:600; transition:border-color .15s, color .15s; }}
 .stButton > button:hover, .stDownloadButton > button:hover {{ border-color:var(--sb-cyan); color:var(--sb-cyan); }}
-/* Frost (nord8) is light: primary buttons and tags need Polar Night text, not white (2:1 -> 8:1 contrast). */
+/* Cream text on blue primary buttons and tags. */
 button[kind^="primary"], button[kind^="primary"] p, [data-baseweb="tag"], [data-baseweb="tag"] span {{
-        color:{COLORS['bg']} !important; }}
-button[kind^="primary"]:hover {{ background:#8FBCBB !important; border-color:#8FBCBB !important; }}
+        color:{COLORS['text']} !important; }}
+button[kind^="primary"]:hover {{ background:#4A84E8 !important; border-color:#4A84E8 !important; }}
 code {{ font-family:{MONO}; }}
 .sb-header {{ border-left:3px solid var(--sb-cyan); padding:2px 0 2px 14px; margin-bottom:1.2rem; }}
 .sb-header h1 {{ margin:0; padding:0; font-size:2rem; }}

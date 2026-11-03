@@ -11,8 +11,8 @@ from smartbeam.ui.theme import COLORS
 C = COLORS
 st.markdown(f"""
 <div style="padding:34px 34px 30px;border:1px solid {C['border']};border-radius:16px;margin-bottom:22px;
-  background:radial-gradient(1200px 300px at 15% -20%, rgba(136,192,208,0.16), transparent 60%),
-             radial-gradient(800px 260px at 95% 120%, rgba(235,203,139,0.10), transparent 60%), {C['panel']};">
+  background:radial-gradient(1200px 300px at 15% -20%, rgba(45,108,223,0.16), transparent 60%),
+             radial-gradient(800px 260px at 95% 120%, rgba(220,201,161,0.10), transparent 60%), {C['panel']};">
   <div style="color:{C['cyan']};font-weight:700;letter-spacing:0.14em;font-size:0.78rem">
     SOLID MECHANICS · BEAM ANALYSIS SUITE</div>
   <div style="font-size:2.7rem;font-weight:800;line-height:1.1;margin:10px 0 6px">SmartBeam 2.0</div>

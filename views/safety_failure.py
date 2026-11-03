@@ -51,7 +51,7 @@ with tabs[0]:
     st.markdown(f"{status_badge(yr.status)} &nbsp; {yr.message}", unsafe_allow_html=True)
     util = np.maximum(np.abs(result.sigma_top), np.abs(result.sigma_bottom)) / yr.sigma_y
     fig = go.Figure(go.Scatter(x=result.x, y=util, mode="lines", line=dict(color=C["cyan"], width=2.4), fill="tozeroy",
-                               fillcolor="rgba(136,192,208,0.12)",
+                               fillcolor="rgba(45,108,223,0.12)",
                                hovertemplate="x = %{x:.4g} m<br>|σ|/σy = %{y:.4g}<extra></extra>"))
     fig.add_hline(y=1.0, line=dict(color=C["red"], dash="dash"), annotation_text="first yield (|σ| = σy)",
                   annotation_font_color=C["red"])
@@ -101,7 +101,7 @@ with tabs[1]:
     with b:
         fig = go.Figure(go.Scatter(x=vm.vm_profile / 1e6, y=vm.y_profile * 1e3, mode="lines",
                                    line=dict(color=C["violet"], width=2.6), fill="tozerox",
-                                   fillcolor="rgba(180,142,173,0.12)",
+                                   fillcolor="rgba(126,162,227,0.12)",
                                    hovertemplate="y = %{y:.3g} mm<br>σvm = %{x:.4g} MPa<extra></extra>"))
         fig.add_vline(x=yr.sigma_y / 1e6, line=dict(color=C["red"], dash="dash"), annotation_text="σy",
                       annotation_font_color=C["red"])
@@ -152,7 +152,7 @@ with tabs[2]:
         with a:
             fig = go.Figure(go.Scatter(x=bres.mode_x, y=bres.mode_shape, mode="lines",
                                        line=dict(color=C["amber"], width=3), fill="tozeroy",
-                                       fillcolor="rgba(235,203,139,0.12)",
+                                       fillcolor="rgba(220,201,161,0.12)",
                                        hovertemplate="x = %{x:.4g} m<br>w/wmax = %{y:.3f}<extra></extra>"))
             fig.add_hline(y=0, line=dict(color=C["cyan"], width=4))
             fig.update_layout(height=300, title=f"First buckling mode ({bres.end_condition}), normalised",
