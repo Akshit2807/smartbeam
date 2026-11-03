@@ -4,7 +4,7 @@ import streamlit as st
 
 from smartbeam import viz3d
 from smartbeam.model import BeamModel
-from smartbeam.ui.plots_core import METHOD_LABEL, model_caption, require_result
+from smartbeam.ui.plots_core import METHOD_LABEL, cached_figure, model_caption, require_result
 from smartbeam.ui.state import get_model, recent_analyses, set_model
 from smartbeam.ui.theme import COLORS
 
@@ -33,7 +33,7 @@ left, right = st.columns([1.35, 1], gap="large")
 with left:
     st.subheader("Current beam in 3D")
     st.caption(model_caption(model))
-    fig = viz3d.beam_figure(result, height=430)
+    fig = cached_figure(("3d-home", model.to_json(indent=None)), lambda: viz3d.beam_figure(result, height=430))
     st.plotly_chart(fig, theme=None)
     st.caption(f"Deformation magnified ×{viz3d.auto_amplification(result):.3g}; colour = bending stress σ = N/A − My/I "
                "(beam theory). Drag to rotate, scroll to zoom.")
@@ -47,36 +47,36 @@ with right:
     sig = abs(result.sigma_max.value)
     b.metric("Yield FOS", f"{model.material.yield_strength / sig:.3g}" if sig > 0 else "∞")
     st.caption(f"Solver route: **{METHOD_LABEL[result.method]}** · {result.stability.message}")
-    st.page_link("pages/design_studio.py", label="Edit this design", icon=":material/design_services:")
-    st.page_link("pages/analysis.py", label="Full analysis", icon=":material/functions:")
-    st.page_link("pages/visualization_3d.py", label="Open the 3D viewer", icon=":material/view_in_ar:")
+    st.page_link("views/design_studio.py", label="Edit this design", icon=":material/design_services:")
+    st.page_link("views/analysis.py", label="Full analysis", icon=":material/functions:")
+    st.page_link("views/visualization_3d.py", label="Open the 3D viewer", icon=":material/view_in_ar:")
 
 st.divider()
 st.subheader("Capabilities")
 CAPS = [
-    ("pages/design_studio.py", "Design Studio", "design_services",
+    ("views/design_studio.py", "Design Studio", "design_services",
      "Section, material library, supports and loads with unit-aware validation."),
-    ("pages/analysis.py", "Analysis", "functions",
+    ("views/analysis.py", "Analysis", "functions",
      "Reactions, SFD, BMD, stress/strain through the depth, slope and deflection, equilibrium checks."),
-    ("pages/numerical_fem.py", "Numerical FEM", "grid_on",
+    ("views/numerical_fem.py", "Numerical FEM", "grid_on",
      "Independent 1D beam FEM: mesh, stiffness matrix, nodal results, convergence 2→32 elements."),
-    ("pages/beam_theories.py", "Beam Theories", "menu_book",
+    ("views/beam_theories.py", "Beam Theories", "menu_book",
      "Euler–Bernoulli vs Timoshenko and the shear-deformation share versus L/h."),
-    ("pages/visualization_3d.py", "3D Visualization", "view_in_ar",
+    ("views/visualization_3d.py", "3D Visualization", "view_in_ar",
      "Deformed beam with stress colour map, supports, loads and max markers."),
-    ("pages/safety_failure.py", "Safety & Failure", "health_and_safety",
+    ("views/safety_failure.py", "Safety & Failure", "health_and_safety",
      "Yield FOS, von Mises, Euler buckling and stress-life fatigue from your data."),
-    ("pages/design_comparison.py", "Design Comparison", "compare",
+    ("views/design_comparison.py", "Design Comparison", "compare",
      "Save designs and compare stiffness, strength, mass and cost."),
-    ("pages/optimization.py", "Optimization", "tune",
+    ("views/optimization.py", "Optimization", "tune",
      "SLSQP sizing with independent re-verification and Pareto trade-offs."),
-    ("pages/design_advisor.py", "Design Advisor", "lightbulb",
+    ("views/design_advisor.py", "Design Advisor", "lightbulb",
      "Rule-based diagnosis of the limiting criterion with verified fixes."),
-    ("pages/virtual_lab.py", "Virtual Lab", "science",
+    ("views/virtual_lab.py", "Virtual Lab", "science",
      "Guided experiments, design challenges and sensitivity studies."),
-    ("pages/playground.py", "Structural Playground", "draw",
+    ("views/playground.py", "Structural Playground", "draw",
      "Drag-and-drop supports and loads on a live canvas."),
-    ("pages/reports.py", "Reports", "description", "PDF engineering report and CSV data export."),
+    ("views/reports.py", "Reports", "description", "PDF engineering report and CSV data export."),
 ]
 for row in range(0, len(CAPS), 4):
     cols = st.columns(4)

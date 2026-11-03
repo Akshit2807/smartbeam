@@ -377,9 +377,9 @@ with right:
             st.caption(f"Solver route: {METHOD_LABEL[res.method]}")
         except (ModelError, UnstableStructureError) as exc:
             st.error(str(exc))
-    st.page_link("pages/analysis.py", label="Go to full analysis", icon=":material/functions:")
-    st.page_link("pages/visualization_3d.py", label="View in 3D", icon=":material/view_in_ar:")
-    st.page_link("pages/playground.py", label="Place supports anywhere (Playground)", icon=":material/draw:")
+    st.page_link("views/analysis.py", label="Go to full analysis", icon=":material/functions:")
+    st.page_link("views/visualization_3d.py", label="View in 3D", icon=":material/view_in_ar:")
+    st.page_link("views/playground.py", label="Place supports anywhere (Playground)", icon=":material/draw:")
 
     with st.container(border=True):
         n1, n2 = st.columns([1.6, 1], vertical_alignment="bottom")

@@ -6,7 +6,7 @@
 
 SmartBeam 2.0 is a beam-analysis application for a second-year Solid Mechanics course. It is a single local
 Streamlit app with 14 pages. Every number and plot comes from a Python calculation engine (`smartbeam/`) that is kept
-separate from the UI (`pages/`, `smartbeam/ui/`). The engine solves each beam in two independent ways:
+separate from the UI (`views/`, `smartbeam/ui/`). The engine solves each beam in two independent ways:
 
 - **Classical solid mechanics:** statics, then numerical integration of EI v'' = M.
 - **1D finite elements:** Euler–Bernoulli, Timoshenko and planar frame elements.
@@ -63,7 +63,7 @@ smartbeam/                         project root (run everything from here)
 ├── docs/
 │   ├── REQUIREMENTS.md            consolidated project brief
 │   └── ARCHITECTURE.md            engine API contract, sign convention, contract changes
-├── pages/                         one file per page (UI only, calls the engine)
+├── views/                         one file per page (UI only, calls the engine)
 │   ├── home.py  design_studio.py  analysis.py  numerical_fem.py  beam_theories.py
 │   ├── visualization_3d.py  safety_failure.py  design_comparison.py  optimization.py
 │   └── design_advisor.py  virtual_lab.py  playground.py  reports.py  about.py

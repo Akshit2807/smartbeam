@@ -123,7 +123,7 @@ with c1:
     if st.button("Open in 3D Visualization", icon=":material/view_in_ar:", type="primary", disabled=model is None,
                  width="stretch", help="Make this beam the current design and open the 3D view"):
         set_model(model)
-        st.switch_page("pages/visualization_3d.py")
+        st.switch_page("views/visualization_3d.py")
 with c2:
     if st.button("Use as current design", icon=":material/save:", disabled=model is None, width="stretch",
                  help="Send this beam to Design Studio, Analysis, Safety and the other pages"):

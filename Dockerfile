@@ -15,6 +15,11 @@ RUN pip install --no-cache-dir --user -r requirements.txt
 
 COPY --chown=user . .
 
+# Do slow one-time work at build time, not on the first visit: Matplotlib font cache + bytecode.
+RUN python -c "import matplotlib.pyplot" && python -m compileall -q smartbeam views app.py serve.py
+
+# Render/Railway/etc. inject $PORT; Hugging Face uses 7860.
+ENV PORT=7860
 EXPOSE 7860
-# XSRF off: the Space is shown inside an iframe, where Streamlit's XSRF cookie breaks file uploads.
-CMD ["streamlit", "run", "app.py", "--server.port=7860", "--server.address=0.0.0.0", "--server.enableXsrfProtection=false"]
+# XSRF off: hosts that embed the app in an iframe (e.g. Hugging Face) break Streamlit's XSRF cookie on uploads.
+CMD ["sh", "-c", "python serve.py --server.port=${PORT} --server.address=0.0.0.0 --server.enableXsrfProtection=false"]

@@ -30,7 +30,7 @@ smartbeam/                    project root (run everything from here)
 │       ├── theme.py          CSS, COLORS, Plotly template, page_header, badge   [architect]  IMPLEMENTED
 │       ├── state.py          session-state helpers, cached analysis             [architect]  IMPLEMENTED
 │       └── (playground component, plot helpers: owners add files here, e.g. ui/plots.py, ui/playground/)
-├── pages/                    one file per page; each page's owner = owner of the matching engine module
+├── views/                    one file per page; each page's owner = owner of the matching engine module
 │   home.py design_studio.py analysis.py numerical_fem.py beam_theories.py visualization_3d.py
 │   safety_failure.py design_comparison.py optimization.py design_advisor.py virtual_lab.py
 │   playground.py reports.py about.py
@@ -292,7 +292,7 @@ name (e.g. `playground_selected`).
 Navigation (app.py): Overview [Home] · Design & Analysis [Design Studio, Analysis, Numerical FEM, Beam Theories,
 3D Visualization] · Evaluate & Improve [Safety & Failure, Design Comparison, Optimization, Design Advisor] ·
 Explore [Virtual Lab, Structural Playground] · Output [Reports, About & Methodology].
-To link: `st.page_link("pages/analysis.py", label=...)` / `st.switch_page("pages/visualization_3d.py")`.
+To link: `st.page_link("views/analysis.py", label=...)` / `st.switch_page("views/visualization_3d.py")`.
 
 ## 7. Testing
 

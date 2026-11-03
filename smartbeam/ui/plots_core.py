@@ -63,7 +63,7 @@ def require_result(model: BeamModel | None = None, **kw):
     except (ModelError, UnstableStructureError) as exc:
         kind = "Unstable structure" if isinstance(exc, UnstableStructureError) else "Invalid model"
         st.error(f"**{kind}.** {exc}")
-        st.page_link("pages/design_studio.py", label="Fix the design in Design Studio", icon=":material/edit:")
+        st.page_link("views/design_studio.py", label="Fix the design in Design Studio", icon=":material/edit:")
         st.stop()
 
 
@@ -134,8 +134,28 @@ def field_figure(x, y, ext, name: str, unit: str, scale: float, color: str, heig
     return fig
 
 
+@st.cache_resource(max_entries=256, show_spinner=False)
+def _figure_cache(key: tuple, _build) -> go.Figure:
+    return _build()
+
+
+def cached_figure(key: tuple, build) -> go.Figure:
+    """Build a figure once per key and reuse it across reruns and sessions.
+
+    Plotly validates every shape/trace on construction, which dominates rerun time on small hosts. Sharing the
+    object is safe because st.plotly_chart only reads it (to_dict / to_json); callers must not mutate the result.
+    """
+    return _figure_cache(key, build)
+
+
 def beam_schematic(model: BeamModel, mesh=None, height: int = 230, show_dims: bool = True) -> go.Figure:
-    """2D engineering sketch: beam, supports, loads (+ optional FE mesh nodes/elements)."""
+    """2D engineering sketch: beam, supports, loads (+ optional FE mesh nodes/elements). Cached per model."""
+    mesh_key = None if mesh is None else (mesh.nodes.tobytes(), mesh.elements.tobytes())
+    return cached_figure(("schematic", model.to_json(indent=None), mesh_key, height, show_dims),
+                         lambda: _beam_schematic(model, mesh, height, show_dims))
+
+
+def _beam_schematic(model: BeamModel, mesh, height: int, show_dims: bool) -> go.Figure:
     L = model.L
     fig = go.Figure()
     fig.add_shape(type="rect", x0=0, x1=L, y0=-0.08, y1=0.08, fillcolor=rgba(COLORS["cyan"], 0.25),
@@ -220,7 +240,11 @@ def beam_schematic(model: BeamModel, mesh=None, height: int = 230, show_dims: bo
 
 
 def section_figure(section, height: int = 230) -> go.Figure:
-    """Cross-section sketch to scale with centroid / neutral axis."""
+    """Cross-section sketch to scale with centroid / neutral axis. Cached per section."""
+    return cached_figure(("section", repr(section), height), lambda: _section_figure(section, height))
+
+
+def _section_figure(section, height: int) -> go.Figure:
     fig = go.Figure()
     cyan = COLORS["cyan"]
     if section.shape == "rect":

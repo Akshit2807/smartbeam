@@ -6,7 +6,7 @@ from smartbeam.ui.theme import apply_theme
 st.set_page_config(page_title="SmartBeam 2.0", page_icon=":material/architecture:", layout="wide")
 apply_theme()
 
-P = lambda file, title, icon, **kw: st.Page(f"pages/{file}.py", title=title, icon=f":material/{icon}:", **kw)  # noqa: E731
+P = lambda file, title, icon, **kw: st.Page(f"views/{file}.py", title=title, icon=f":material/{icon}:", **kw)  # noqa: E731
 
 nav = st.navigation({
     "Overview": [P("home", "Home", "home", default=True)],

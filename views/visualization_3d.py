@@ -2,7 +2,7 @@
 import streamlit as st
 
 from smartbeam import viz3d
-from smartbeam.ui.plots_core import METHOD_LABEL, model_caption, require_result, show_warnings
+from smartbeam.ui.plots_core import METHOD_LABEL, cached_figure, model_caption, require_result, show_warnings
 from smartbeam.ui.state import get_model
 from smartbeam.ui.theme import page_header
 
@@ -41,7 +41,8 @@ with ctrl:
 with view:
     if not (show["show_deformed"] or show["show_undeformed"]):
         st.warning("Both beam layers are hidden; turn one on to see the beam.")
-    fig = viz3d.beam_figure(result, amplification=amp, height=640, **show)
+    fig = cached_figure(("3d", model.to_json(indent=None), amp, tuple(show.items())),
+                        lambda: viz3d.beam_figure(result, amplification=amp, height=640, **show))
     st.plotly_chart(fig, theme=None, key="v3d_fig")
     st.caption("Blue = compression, red = tension (σ = N/A − M·y/I, linear through the depth, uniform across the "
                "width). Hover the surface for x, y, σ and v; hover the cyan centreline for v and θ. Supports and loads "
