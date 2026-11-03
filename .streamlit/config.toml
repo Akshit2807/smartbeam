@@ -1,18 +1,18 @@
 [theme]
 base = "dark"
-primaryColor = "#22D3EE"
-backgroundColor = "#0B1220"
-secondaryBackgroundColor = "#111A2B"
-textColor = "#E6EDF7"
-borderColor = "#24324D"
-linkColor = "#22D3EE"
+primaryColor = "#88C0D0"
+backgroundColor = "#2E3440"
+secondaryBackgroundColor = "#3B4252"
+textColor = "#ECEFF4"
+borderColor = "#4C566A"
+linkColor = "#88C0D0"
 font = "Inter, 'Segoe UI', system-ui, -apple-system, Helvetica, Arial, sans-serif"
 codeFont = "'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace"
 baseRadius = "0.6rem"
-chartCategoricalColors = ["#22D3EE", "#F5A524", "#A78BFA", "#34D399", "#60A5FA", "#F87171"]
+chartCategoricalColors = ["#88C0D0", "#EBCB8B", "#B48EAD", "#A3BE8C", "#81A1C1", "#BF616A"]
 
 [theme.sidebar]
-backgroundColor = "#111A2B"
+backgroundColor = "#3B4252"
 
 [server]
 headless = true

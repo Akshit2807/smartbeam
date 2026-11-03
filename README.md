@@ -59,7 +59,7 @@ smartbeam/                         project root (run everything from here)
 ├── app.py                         Streamlit entry: navigation + theme
 ├── requirements.txt
 ├── README.md
-├── .streamlit/config.toml         dark navy theme
+├── .streamlit/config.toml         Nord palette theme
 ├── docs/
 │   ├── REQUIREMENTS.md            consolidated project brief
 │   └── ARCHITECTURE.md            engine API contract, sign convention, contract changes

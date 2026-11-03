@@ -23,8 +23,8 @@ DISCLAIMER = ("Beam-theory visualisation, not a 3D continuum (solid FEA) solutio
               "the centreline deflection v(x) with plane sections rotated by θ(x), magnified by the "
               "amplification factor.")
 
-CYAN, AMBER, MUTED, TEXT, GREEN, RED = "#22D3EE", "#F5A524", "#8FA0BA", "#E6EDF7", "#34D399", "#F87171"
-STRESS_SCALE = [[0.0, "#2563EB"], [0.25, "#60A5FA"], [0.5, "#E6EDF7"], [0.75, "#F87171"], [1.0, "#DC2626"]]
+CYAN, AMBER, MUTED, TEXT, GREEN, RED = "#88C0D0", "#EBCB8B", "#A0A9BA", "#ECEFF4", "#A3BE8C", "#BF616A"
+STRESS_SCALE = [[0.0, "#5E81AC"], [0.25, "#81A1C1"], [0.5, "#ECEFF4"], [0.75, "#BF616A"], [1.0, "#BF616A"]]
 
 
 def auto_amplification(result, target: float = 0.08) -> float:
@@ -159,7 +159,7 @@ def _supports(model, glyph, half_w):
                                            name=label, hoverinfo="name", showlegend=False))
             base = yb - size - (0.25 * size if sp.type == "roller" else 0.0)
             traces.append(_box(sp.x - 0.75 * size, sp.x + 0.75 * size, -half_w * 1.2, half_w * 1.2,
-                               base - 0.08 * size, base, "#475569", label))
+                               base - 0.08 * size, base, "#616E88", label))
     return traces
 
 
@@ -314,7 +314,7 @@ def beam_figure(result, amplification: float | None = None, show_undeformed: boo
             textfont=dict(color=CYAN, size=12), showlegend=False,
             hovertemplate=f"Max |v| = {vm.value * 1e3:.4g} mm at x = {vm.x:.4g} m<extra></extra>"))
 
-    axis = dict(backgroundcolor="#0E1626", gridcolor="#1F2B42", zerolinecolor="#24324D", color=MUTED,
+    axis = dict(backgroundcolor="#3B4252", gridcolor="#434C5E", zerolinecolor="#4C566A", color=MUTED,
                 showspikes=False)
     fig = go.Figure(traces)
     # True proportions, normalised so the longest axis is 1. Plotly's aspectmode="data" normalises by the
@@ -331,6 +331,6 @@ def beam_figure(result, amplification: float | None = None, show_undeformed: boo
                    xaxis=dict(title="x (m)", **axis), yaxis=dict(title="z (m)", **axis),
                    zaxis=dict(title="y (m)", **axis),
                    camera=dict(eye=dict(x=0.2, y=-1.05, z=0.42), up=dict(x=0, y=0, z=1))),
-        hoverlabel=dict(bgcolor="#16213A", font=dict(color=TEXT)),
+        hoverlabel=dict(bgcolor="#434C5E", font=dict(color=TEXT)),
     )
     return fig
