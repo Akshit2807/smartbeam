@@ -2,7 +2,7 @@
 
 **Understand. Simulate. Predict. Optimize.**
 
-> **Live app:** _link added after Streamlit Cloud deploy_ · **Reviewers:** start with [TESTING.md](TESTING.md)
+> **Live app:** https://smartbeam2.streamlit.app · **Reviewers:** start with [TESTING.md](TESTING.md)
 
 SmartBeam 2.0 is a beam-analysis application for a second-year Solid Mechanics course. It is a single local
 Streamlit app with 14 pages. Every number and plot comes from a Python calculation engine (`smartbeam/`) that is kept

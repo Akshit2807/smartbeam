@@ -3,7 +3,7 @@
 This guide is for a reviewer who wants to check that SmartBeam works and that its numbers are right.
 Plan on about 15 minutes for the automated checks and 30–45 minutes for the manual walkthrough.
 
-- **Live app:** see the link at the top of `README.md` (Streamlit Community Cloud), or run it locally (section 1).
+- **Live app:** https://smartbeam2.streamlit.app, or run it locally (section 1).
 - **Feature list:** `README.md` → "Features by module".
 - **Limitations:** section 5 of this guide.
 
