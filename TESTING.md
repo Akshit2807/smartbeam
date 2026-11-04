@@ -3,7 +3,7 @@
 This guide is for a reviewer who wants to check that SmartBeam works and that its numbers are right.
 Plan on about 15 minutes for the automated checks and 30–45 minutes for the manual walkthrough.
 
-- **Live app:** https://smartbeam2.streamlit.app, or run it locally (section 1).
+- **Live app:** https://smartbeam.onrender.com, or run it locally (section 1).
 - **Feature list:** `README.md` → "Features by module".
 - **Limitations:** section 5 of this guide.
 
@@ -139,7 +139,7 @@ These are deliberate scope limits, not bugs. Report anything else you find.
 - **Supports:** fixed, pin and roller only. No springs, settlements or internal hinges.
 - **Loads:** static only. Distributed loads are transverse; axial or inclined effects use point loads.
 - **Playground UI:** the canvas material menu lists library materials only. Labels of loads at the same x can overlap. Over the canvas, Ctrl/⌘ + wheel zooms and a plain wheel scrolls the page.
-- **Hosted version:** saved configurations on the Streamlit Cloud deployment are not permanent; they reset when the app restarts. Use the JSON download to keep them.
+- **Hosted version:** saved configurations on the hosted deployment are not permanent; they reset when the app restarts. Use the JSON download to keep them.
 
 ---
 
